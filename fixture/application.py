@@ -7,7 +7,7 @@ from fixture.contact import ContactHelper
 class Application:
     def __init__(self):
         self.wd = WebDriver()
-        self.wd.implicitly_wait(2)
+#        self.wd.implicitly_wait(2)
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
         self.contact = ContactHelper(self)
@@ -22,7 +22,8 @@ class Application:
     def open_home_page(self):
         wd = self.wd
         # open homepage
-        wd.get("http://localhost/addressbook/")
+        if not (wd.current_url.endswith("/addressbook/")):
+            wd.get("http://localhost/addressbook/")
 
     def destroy(self):
         self.wd.quit()
